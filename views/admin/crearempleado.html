@@ -1,0 +1,69 @@
+{{extend 'layout.html'}}
+<div class="col-md-12 modal-body text-center" style="background:url(images/hola.jpg)">
+    <h1>
+        Ingreso de Empleados
+    </h1>
+</div>
+<form class="form-horizontal" method="POST">
+   <section class="col-xs-12">
+    {{if empleadoid != None:}}
+    <p>
+        Empleado ingresado Exitosamente {{=empleadoid}}
+    </p>
+    {{pass}}
+   </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">Nombre Completo:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="text" class="form-control" name="nombre">
+    </article>
+   </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">Fecha de nacimiento:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="date" class="form-control" name="nacimiento">
+    </article>
+   </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">No. de Identificacion:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="text" class="form-control" name="identificacion">
+    </article>
+   </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+       <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">Tipo de Empleado:</span>
+        </h3>
+    </article>
+   <article class="col-xs-12 col-md-4 modal-body">
+          {{rows = db().select(db.tipoempleado.ALL)}}
+        <select name="tipo" class="form-control">
+            {{for row in rows:}}
+            <option args="0" value="{{=row.id}}">
+                {{=row.descripcion}}
+            </option>
+            {{pass}}
+        </select>
+    </article>
+    </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-12 modal-body">
+        <div class="col-xs-6 col-md-2 col-md-offset-4">
+            <input type="submit" class="form-control btn btn-success" name="Guardar"></input>
+        </div>
+    </article>
+   </section>
+</form>

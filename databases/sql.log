@@ -1,0 +1,1704 @@
+timestamp: 2018-05-05T13:57:50.390000
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2018-05-05T13:57:50.403000
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2018-05-05T13:57:50.412000
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-05T13:57:50.437000
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2018-05-05T13:57:50.447000
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2018-05-05T13:57:50.456000
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2018-05-07T21:20:40.231000
+CREATE TABLE rh_tipo_empleado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT
+);
+success!
+timestamp: 2018-05-07T21:20:40.256000
+CREATE TABLE rh_empleado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT,
+    fecha_nacimiento TIMESTAMP,
+    identificacion TEXT,
+    horario TEXT,
+    id_tipo INTEGER REFERENCES rh_tipo_empleado (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-07T21:20:40.284000
+CREATE TABLE es_alumno(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre CHAR(512),
+    fecha_nacimiento TIMESTAMP,
+    direccion TEXT,
+    telefono TEXT,
+    nombre_encargado TEXT
+);
+success!
+timestamp: 2018-05-07T21:20:40.302000
+CREATE TABLE es_grado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT
+);
+success!
+timestamp: 2018-05-07T21:20:40.321000
+CREATE TABLE es_seccion(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT
+);
+success!
+timestamp: 2018-05-07T21:20:40.342000
+CREATE TABLE es_seccionxgrado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_grado INTEGER REFERENCES es_grado (id) ON DELETE CASCADE  ,
+    id_seccion INTEGER REFERENCES es_seccion (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-07T21:20:40.364000
+CREATE TABLE es_asignacion(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_alumno INTEGER REFERENCES es_alumno (id) ON DELETE CASCADE  ,
+    id_gradoxseccion INTEGER REFERENCES es_seccionxgrado (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-07T21:20:40.392000
+CREATE TABLE es_curso(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT,
+    id_empleado INTEGER REFERENCES rh_empleado (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-07T21:20:40.420000
+CREATE TABLE es_calificacion(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT,
+    id_alumno INTEGER REFERENCES es_alumno (id) ON DELETE CASCADE  ,
+    id_curso INTEGER REFERENCES es_curso (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-07T21:20:40.445000
+CREATE TABLE es_cursoxgrado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_curso INTEGER REFERENCES es_curso (id) ON DELETE CASCADE  ,
+    id_grado INTEGER REFERENCES es_grado (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-07T21:20:40.472000
+CREATE TABLE es_horarioxcurso(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_cursoxgrado INTEGER REFERENCES es_cursoxgrado (id) ON DELETE CASCADE  ,
+    horario CHAR(512),
+    id_seccion INTEGER REFERENCES es_seccion (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-07T21:20:40.498000
+CREATE TABLE iv_suministro(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Descripcion TEXT,
+    cantidad INTEGER
+);
+success!
+success!
+success!
+success!
+success!
+timestamp: 2018-05-22T21:38:53.666000
+CREATE TABLE alumno(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre CHAR(512),
+    fecha_nacimiento CHAR(512),
+    direccion CHAR(512),
+    telefono CHAR(512),
+    nombre_encargado CHAR(512)
+);
+success!
+success!
+success!
+timestamp: 2018-05-22T21:47:14.678000
+CREATE TABLE tipoempleado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT
+);
+success!
+timestamp: 2018-05-22T21:47:14.694000
+CREATE TABLE empleado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT,
+    fechanacimiento CHAR(512),
+    identificacion TEXT,
+    horario TEXT,
+    idtipo INTEGER REFERENCES tipoempleado (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-22T21:47:14.712000
+CREATE TABLE grado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT
+);
+success!
+timestamp: 2018-05-22T21:47:14.725000
+CREATE TABLE seccion(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT
+);
+success!
+timestamp: 2018-05-22T21:47:14.739000
+CREATE TABLE seccionxgrado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    idgrado INTEGER REFERENCES grado (id) ON DELETE CASCADE  ,
+    idseccion INTEGER REFERENCES seccion (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-22T21:47:14.751000
+CREATE TABLE asignacion(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    idalumno INTEGER REFERENCES alumno (id) ON DELETE CASCADE  ,
+    idgradoxseccion INTEGER REFERENCES seccionxgrado (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-22T21:47:14.764000
+CREATE TABLE curso(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT,
+    idempleado INTEGER REFERENCES empleado (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-22T21:47:14.777000
+CREATE TABLE calificacion(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    descripcion TEXT,
+    idalumno INTEGER REFERENCES alumno (id) ON DELETE CASCADE  ,
+    idcurso INTEGER REFERENCES curso (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-22T21:47:14.790000
+CREATE TABLE cursoxgrado(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    idcurso INTEGER REFERENCES curso (id) ON DELETE CASCADE  ,
+    idgrado INTEGER REFERENCES grado (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-22T21:47:14.808000
+CREATE TABLE horarioxcurso(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    idcursoxgrado INTEGER REFERENCES cursoxgrado (id) ON DELETE CASCADE  ,
+    horario CHAR(512),
+    idseccion INTEGER REFERENCES seccion (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2018-05-22T21:47:14.826000
+CREATE TABLE suministro(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    Descripcion TEXT,
+    cantidad INTEGER
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2018-05-24T21:14:33.746000
+ALTER TABLE calificacion ADD fechaingreso DATE;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!

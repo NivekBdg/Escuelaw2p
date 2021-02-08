@@ -1,0 +1,5 @@
+{{extend 'layout.html'}}
+<h1>Está es la plantilla default/ingresoalumno.html</h1>
+<div>
+    Hola mundo
+</div>

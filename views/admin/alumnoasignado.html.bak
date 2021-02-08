@@ -1,0 +1,20 @@
+{{extend 'layout.html'}}
+<div class="col-xs-12 modal-header">
+    <H1>
+        Listado de Alumnos Asignados
+    </H1>
+</div>
+<section class="col-xs-12">
+{{for alumno in alumno:}}
+    <article class="col-xs-12 col-md-2 modal-body">
+            <a type="button" class="btn btn-link">{{=alumno.alumno.nombre}}</a>
+    </article>
+    <article class="col-xs-12 col-md-2 modal-body">
+       <a type="button" class="btn btn-link">{{=alumno.grado.descripcion}}</a>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+       <label>Seccion</label>{{=alumno.seccion.descripcion}}
+    </article>
+    </br>
+{{pass}}
+</section>

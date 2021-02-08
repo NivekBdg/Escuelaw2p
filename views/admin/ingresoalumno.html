@@ -1,0 +1,71 @@
+{{extend 'layout.html'}}
+<div class="col-md-12 modal-body text-center" style="background:url(images/hola.jpg)">
+    <h1>
+        Ingreso de Alumnos
+    </h1>
+</div>
+<form class="form-horizontal" method="POST">
+    <section class="col-xs-12">
+    {{if alumnoid != None:}}
+    <p>
+        Alumno ingresado exitosamente {{=alumnoid}}
+    </p>
+    {{pass}}
+</section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">Nombre del alumno:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="text" class="form-control" name="name">
+    </article>
+   </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">Fecha de Nacimiento:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="date" class="form-control" name="nacimiento">
+    </article>
+   </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">Direccion del alumno:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="text" class="form-control" name="direccion">
+    </article>
+   </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">telefono del encargado:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="text" class="form-control" name="telefono">
+    </article>
+   </section>
+    <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">Nombre del encargado:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="text" class="form-control" name="encargado">
+    </article>
+    <article class="col-xs-12 col-md-12 modal-body">
+        <div class="col-xs-6 col-md-2 col-md-offset-4">
+            <input type="submit" class="form-control btn btn-success" name="Guardar"></input>
+        </div>
+    </article>
+   </section>
+</form>
+{{=BEAUTIFY(response._vars)}}

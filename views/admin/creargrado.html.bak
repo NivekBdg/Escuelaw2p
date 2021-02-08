@@ -1,0 +1,32 @@
+{{extend 'layout.html'}}
+<div class="col-md-12 modal-body text-center" style="background:url(images/hola.jpg)">
+    <h1>
+        Creacion de Grados
+    </h1>
+</div>
+<form class="form-horizontal" method="POST">
+   <section class="col-xs-12">
+    {{if gradoid != None:}}
+    <p>
+        Grado Creado Exitosamente {{=gradoid}}
+    </p>
+    {{pass}}
+   </section>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-2 modal-body text-center">
+        <h3>
+          <span class="label label-primary">Grado:</span>
+        </h3>
+    </article>
+    <article class="col-xs-12 col-md-4 modal-body">
+         <input type="text" class="form-control" name="grado">
+    </article>
+   <section class="col-xs-12 col-md-12 modal-body">
+    <article class="col-xs-12 col-md-12 modal-body">
+        <div class="col-xs-6 col-md-2 col-md-offset-4">
+            <input type="submit" class="form-control btn btn-success" name="Guardar"></input>
+        </div>
+    </article>
+   </section>
+</form>
+{{=BEAUTIFY(response._vars)}}
